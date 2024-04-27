@@ -1,8 +1,9 @@
 let deckId
 let computerScore = 0
 let playerScore = 0
+const instructionsEl = document.getElementById("instructions")
 const remainingCardsEl = document.getElementById("remaining-cards")
-const newDeckBtn = document.getElementById("new-deck-button")
+const newDeckBtn = document.getElementById("new-deck-img")
 const drawCardBtn = document.getElementById("draw-card-button")
 const computerCardEl = document.getElementById("computer-card")
 const playerCardEl = document.getElementById("player-card")
@@ -16,6 +17,8 @@ newDeckBtn.addEventListener("click", async() => {
         deckId = data.deck_id
         console.log(data)
         remainingCardsEl.textContent = `Remaining cards: ${data.remaining}`
+        instructionsEl.style.color="yellow"
+        instructionsEl.textContent = "Now Draw!"
 })
 
 drawCardBtn.addEventListener("click", async() => {
@@ -30,6 +33,17 @@ drawCardBtn.addEventListener("click", async() => {
 
     
     determineWinner(computerCard, playerCard)    
+
+    if(data.remaining === 0){
+        if(computerScore===playerScore){
+            winnerTitleEl.textContent ="Tie Game!"
+        }else if (computerScore > playerScore){
+            winnerTitleEl.textContent = "Computer Wins the Game!"
+        }else{
+            winnerTitleEl.textContent = "You Win the Game!!"
+        }
+        
+    }
         
     
 })
@@ -50,4 +64,10 @@ function determineWinner(card1, card2){
     }else{
         winnerTitleEl.textContent = "War"
     }
+
+    
 }
+
+
+
+// TODO: WHEN NEW DECK BTN CLICKED, NOTICE TO CLICK DRAW BTN
