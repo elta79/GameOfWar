@@ -1,9 +1,8 @@
 let deckId
 let computerScore = 0
 let playerScore = 0
-const instructionsEl = document.getElementById("instructions")
+
 const remainingCardsEl = document.getElementById("remaining-cards")
-const newDeckBtn = document.getElementById("new-deck-img")
 const drawCardBtn = document.getElementById("draw-card-button")
 const computerCardEl = document.getElementById("computer-card")
 const playerCardEl = document.getElementById("player-card")
@@ -11,40 +10,43 @@ const computerScoreEl = document.getElementById("computer-score")
 const playerScoreEl = document.getElementById("player-score")
 const winnerTitleEl = document.getElementById("winner-title")
 
-newDeckBtn.addEventListener("click", async() => {
-    const res = await fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
-    const data = await res.json()    
-        deckId = data.deck_id
-        console.log(data)
-        remainingCardsEl.textContent = `Remaining cards: ${data.remaining}`
-        instructionsEl.style.color="yellow"
-        instructionsEl.textContent = "Now Draw!"
-})
+
 
 drawCardBtn.addEventListener("click", async() => {
-    const res = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
-    const data = await res.json()        
-        remainingCardsEl.textContent = `Remaining cards: ${data.remaining}`
-        let computerCard = data.cards[0]
-        let playerCard = data.cards[1]
-
-        computerCardEl.innerHTML = `<img src = ${(computerCard.image)}>`
-        playerCardEl.innerHTML = `<img src = ${(playerCard.image)}>`
-
+    if(drawCardBtn.textContent === "New Game"){
+    const resDraw = await fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
+    const dataDraw = await resDraw.json()
+        deckId = dataDraw.deck_id
+        // console.log(dataDraw)
+        drawCardBtn.textContent = "DRAW"
+        remainingCardsEl.textContent = `Remaining cards: ${dataDraw.remaining}`
+    }else{
+        const res = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
+        const data = await res.json()        
+            remainingCardsEl.textContent = `Remaining cards: ${data.remaining}`
+            let computerCard = data.cards[0]
+            let playerCard = data.cards[1]
     
-    determineWinner(computerCard, playerCard)    
-
-    if(data.remaining === 0){
-        if(computerScore===playerScore){
-            winnerTitleEl.textContent ="Tie Game!"
-        }else if (computerScore > playerScore){
-            winnerTitleEl.textContent = "Computer Wins the Game!"
-        }else{
-            winnerTitleEl.textContent = "You Win the Game!!"
+            computerCardEl.innerHTML = `<img class="card-img" src = ${(computerCard.image)}>`
+            playerCardEl.innerHTML = `<img class ="card-img" src = ${(playerCard.image)}>`
+    
+        
+        determineWinner(computerCard, playerCard)    
+    
+        if(data.remaining === 0){
+            if(computerScore===playerScore){
+                winnerTitleEl.style.color="red"
+                winnerTitleEl.textContent ="Tie Game!"
+            }else if (computerScore > playerScore){
+                winnerTitleEl.style.color="blue"
+                winnerTitleEl.textContent = "Computer Wins the Game!"
+            }else{
+                winnerTitleEl.style.color="yellow"
+                winnerTitleEl.textContent = "You Win the Game!!"
+            }
+            
         }
-        
     }
-        
     
 })
 
@@ -56,18 +58,16 @@ function determineWinner(card1, card2){
     if (valueIndexCard1 > valueIndexCard2){
         computerScore++       
         computerScoreEl.textContent = `Computer: ${computerScore}`
+        winnerTitleEl.style.color="blue"
         winnerTitleEl.textContent = "Computer Scores"
     }else if(valueIndexCard2 > valueIndexCard1){
         playerScore++
         playerScoreEl.textContent = `Player: ${playerScore}`
+        winnerTitleEl.style.color="yellow"
         winnerTitleEl.textContent = "Player Scores"
     }else{
+        winnerTitleEl.style.color="red"
         winnerTitleEl.textContent = "War"
     }
 
-    
 }
-
-
-
-// TODO: WHEN NEW DECK BTN CLICKED, NOTICE TO CLICK DRAW BTN

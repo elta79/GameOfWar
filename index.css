@@ -2,44 +2,69 @@ body{
     font-family:'Ubuntu', sans-serif;
     font-weight:300;
     background-color: #057101; 
-    color: white;      
+    color: white; 
 }
-.start-container{
-    display:flex;
-    flex-direction: column;
-    
-}
+
 .game-container{    
     display:flex;
     flex-direction:column;
-    align-items: center;
+    align-items: center;   
+    max-width: 500px;
+    margin:auto;
 }
-#new-deck-img{
-    width: 4rem;
-    
-}
+
 #winner-title{
     color: rgb(215, 30, 24);
     font-size:2rem;
 }
-#computer-card, #player-card{
-    border:1px solid rgb(0, 0, 0);
+
+#computer-card, #player-card{    
     border-radius: 12px;
-    height: 314px;
-    width: 225px;
-    overflow: auto;
+    height: 315px;
+    width: 226px;
+    object-fit: contain;
     margin-top: 1.5rem;
     background-color: #09d402;
 }
+
+.card-img{
+    height: 100%;
+}
+
 #draw-card-button{
-    background-color: yellow;
-    width: 225px;
-    border: none;
+    display:block;
+    background-color: yellow; 
+    border:0;  
+    width:226px; 
     border-radius: 12px;
     padding: 0.5rem;
     font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.9;
+
+    position:relative;
+    top:0;
+    margin-top:0;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 0 0 #09d402; 
+}
+
+#draw-card-button:active{
+    box-shadow: none;
+    top:10px;
+    margin-bottom: 0;
+}
+
+#draw-card-button:hover{
+    opacity: 1;    
 }
 
 p{
     font-size: 1.25rem;
+}
+
+.start-container{
+    position: absolute;
+    bottom:0;
+    left:30px;
 }
