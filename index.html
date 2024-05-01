@@ -10,17 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="game-container">
-        <h3 id="winner-title">Let the games begin!</h3>
-        <p id="computer-score">Computer: 0</p>
-        <div id="computer-card"></div>
-        <div id="player-card"></div>
-        <p id="player-score">Player: 0</p>
-        <button id="draw-card-button">New Game</button>
+    <h3 id="winner-title">Let the games begin!</h3>
+    <h3 id="remaining-cards">Remaining cards:</h3>
+    <div class="game-container">        
+        <div id="computer-container">
+            <p id="computer-score">Computer: 0</p>
+            <div id="computer-card"></div>
+        </div>
+        <div id="player-container">
+            <div id="player-card"></div>
+            <p id="player-score">Player: 0</p>
+            <button id="draw-card-button">New Game</button>
+        </div>
     </div>
-    <div class="start-container">   
-        <h3 id="remaining-cards">Remaining cards:</h3>
-    </div>
+
     <script src="index.js"></script>
 </body>
 </html>

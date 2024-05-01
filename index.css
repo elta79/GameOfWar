@@ -16,10 +16,17 @@ body{
 #winner-title{
     color: rgb(215, 30, 24);
     font-size:2rem;
+    text-shadow: 1px 1px 1px black;
+    text-align: center;
 }
-
+#remaining-cards{
+    text-align: center;
+}
+#computer-container, #player-container{
+    text-align: center;
+}
 #computer-card, #player-card{    
-    border-radius: 12px;
+    border-radius: 10px;
     height: 315px;
     width: 226px;
     object-fit: contain;
@@ -33,10 +40,10 @@ body{
 
 #draw-card-button{
     display:block;
-    background-color: yellow; 
+    background-color: rgb(6, 188, 239); 
     border:0;  
     width:226px; 
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 0.5rem;
     font-size: 1.5rem;
     cursor: pointer;
@@ -63,8 +70,32 @@ p{
     font-size: 1.25rem;
 }
 
-.start-container{
-    position: absolute;
-    bottom:0;
-    left:30px;
+
+@media (width < 1440px ) {
+    .game-container{            
+        flex-direction: row;
+        align-items: start;
+        justify-content: space-around;
+        max-width: 100%;
+    }
+    #computer-container{
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    #player-container{
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+    }
+    #computer-card, #player-card{ 
+        height: 200px;
+        width: 144px;
+        object-fit: contain;
+        
+    }
+    #draw-card-button{
+        
+        width:150px; 
+    }
 }

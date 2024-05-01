@@ -18,6 +18,7 @@ drawCardBtn.addEventListener("click", async() => {
     const dataDraw = await resDraw.json()
         deckId = dataDraw.deck_id
         // console.log(dataDraw)
+        drawCardBtn.style.backgroundColor="yellow"
         drawCardBtn.textContent = "DRAW"
         remainingCardsEl.textContent = `Remaining cards: ${dataDraw.remaining}`
     }else{
