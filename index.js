@@ -21,7 +21,7 @@ drawCardBtn.addEventListener("click", async() => {
         drawCardBtn.style.backgroundColor="yellow"
         drawCardBtn.textContent = "DRAW"
         remainingCardsEl.textContent = `Remaining cards: ${dataDraw.remaining}`
-    }else{
+    }else if (drawCardBtn.textContent === "DRAW") {
         const res = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
         const data = await res.json()        
             remainingCardsEl.textContent = `Remaining cards: ${data.remaining}`
@@ -30,22 +30,41 @@ drawCardBtn.addEventListener("click", async() => {
     
             computerCardEl.innerHTML = `<img class="card-img" src = ${(computerCard.image)}>`
             playerCardEl.innerHTML = `<img class ="card-img" src = ${(playerCard.image)}>`
-    
+            computerCardEl.style.backgroundColor="#022f00"
+            playerCardEl.style.backgroundColor="#022f00"
         
         determineWinner(computerCard, playerCard)    
     
         if(data.remaining === 0){
             if(computerScore===playerScore){
-                winnerTitleEl.style.color="red"
+                winnerTitleEl.style.color="#AB0000"
                 winnerTitleEl.textContent ="Tie Game!"
             }else if (computerScore > playerScore){
-                winnerTitleEl.style.color="blue"
+                winnerTitleEl.style.color="#0037AB"
                 winnerTitleEl.textContent = "Computer Wins the Game!"
             }else{
-                winnerTitleEl.style.color="yellow"
+                winnerTitleEl.style.color="#E3E801"
                 winnerTitleEl.textContent = "You Win the Game!!"
             }
             
+            drawCardBtn.style.backgroundColor = "gray"
+            drawCardBtn.style.color = "white"
+            drawCardBtn.textContent = "RESETTING"
+
+            setTimeout(() => {
+                if (drawCardBtn.textContent === "RESETTING"){
+                    drawCardBtn.style.backgroundColor = "#06bcef"
+                    drawCardBtn.style.color = "black"
+                    drawCardBtn.textContent = "New Game"
+                    computerCardEl.innerHTML = ""
+                    playerCardEl.innerHTML = ""
+                    computerCardEl.style.backgroundColor="#09d402"
+                    playerCardEl.style.backgroundColor="#09d402"
+                    remainingCardsEl.textContent = "Remaining cards: 0"
+                    winnerTitleEl.textContent = "Let's play again!!"                    
+                }
+            },4000)
+
         }
     }
     
@@ -59,15 +78,15 @@ function determineWinner(card1, card2){
     if (valueIndexCard1 > valueIndexCard2){
         computerScore++       
         computerScoreEl.textContent = `Computer: ${computerScore}`
-        winnerTitleEl.style.color="blue"
+        winnerTitleEl.style.color="#0037AB"
         winnerTitleEl.textContent = "Computer Scores"
     }else if(valueIndexCard2 > valueIndexCard1){
         playerScore++
         playerScoreEl.textContent = `Player: ${playerScore}`
-        winnerTitleEl.style.color="yellow"
+        winnerTitleEl.style.color="#E3E801"
         winnerTitleEl.textContent = "Player Scores"
     }else{
-        winnerTitleEl.style.color="red"
+        winnerTitleEl.style.color="#AB0000"
         winnerTitleEl.textContent = "War"
     }
 

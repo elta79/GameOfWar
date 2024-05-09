@@ -14,9 +14,9 @@ body{
 }
 
 #winner-title{
-    color: rgb(215, 30, 24);
+    color: #969696;
     font-size:2rem;
-    text-shadow: 1px 1px 1px black;
+    text-shadow: 2px 2px 2px black;
     text-align: center;
 }
 #remaining-cards{
@@ -32,6 +32,7 @@ body{
     object-fit: contain;
     margin-top: 1.5rem;
     background-color: #09d402;
+    border:none;
 }
 
 .card-img{
@@ -40,7 +41,7 @@ body{
 
 #draw-card-button{
     display:block;
-    background-color: rgb(6, 188, 239); 
+    background-color: #06bcef; 
     border:0;  
     width:226px; 
     border-radius: 10px;
@@ -53,7 +54,7 @@ body{
     top:0;
     margin-top:0;
     margin-bottom: 10px;
-    box-shadow: 0 4px 0 0 #09d402; 
+    box-shadow: 0 4px 0 0 #023900; 
 }
 
 #draw-card-button:active{
